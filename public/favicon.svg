@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Icon Background -->
+  <rect width="512" height="512" rx="128" fill="#F4EEE2" />
+  <rect x="12" y="12" width="488" height="488" rx="116" fill="none" stroke="#E6DECE" stroke-width="12" />
+
+  <!-- Dog Ears (Golden Retriever style floppy ears, slightly darker golden brown) -->
+  <!-- Left Ear -->
+  <path d="M 140 180 C 80 190, 60 320, 120 340 C 170 360, 190 260, 180 200 Z" fill="#D39E59" />
+  <!-- Right Ear -->
+  <path d="M 372 180 C 432 190, 452 320, 392 340 C 342 360, 322 260, 332 200 Z" fill="#D39E59" />
+
+  <!-- Dog Head (Bright Warm Golden Retriever Brown) -->
+  <circle cx="256" cy="270" r="120" fill="#E8B86D" />
+
+  <!-- Dog Eyes (Cute shiny black eyes with white highlights) -->
+  <!-- Left Eye -->
+  <circle cx="206" cy="235" r="16" fill="#2E2A20" />
+  <circle cx="201" cy="229" r="5" fill="#FFFFFF" />
+  <circle cx="211" cy="239" r="2" fill="#FFFFFF" />
+  
+  <!-- Right Eye -->
+  <circle cx="306" cy="235" r="16" fill="#2E2A20" />
+  <circle cx="301" cy="229" r="5" fill="#FFFFFF" />
+  <circle cx="311" cy="239" r="2" fill="#FFFFFF" />
+
+  <!-- Dog Snout & Nose -->
+  <ellipse cx="256" cy="285" rx="38" ry="26" fill="#FFFBF2" />
+  <!-- Smiling Tongue -->
+  <path d="M 236 298 C 236 335, 276 335, 276 298 Z" fill="#C16A43" />
+  <line x1="256" y1="298" x2="256" y2="315" stroke="#C16A43" stroke-width="3" />
+  
+  <!-- Nose (Cute rounded triangle) -->
+  <path d="M 238 274 Q 256 266, 274 274 Q 274 286, 256 288 Q 238 286, 238 274 Z" fill="#2E2A20" />
+</svg>

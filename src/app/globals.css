@@ -1,0 +1,77 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-black-han-sans: var(--font-pretendard);
+  --font-ibm-plex-sans-kr: var(--font-pretendard);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-pretendard);
+  --font-black-han: var(--font-pretendard);
+}
+
+body {
+  font-family: var(--font-pretendard);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Map 'Black Han Sans' inline styles globally to Pretendard ExtraBold for clean, readable headers */
+@font-face {
+  font-family: 'Black Han Sans';
+  src: local('Pretendard-ExtraBold'), local('Pretendard ExtraBold'), local('Pretendard'),
+       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* 스크롤바 감추기 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 프로토타입 전환 및 오버레이용 글로벌 키프레임 애니메이션 */
+@keyframes drawerIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
