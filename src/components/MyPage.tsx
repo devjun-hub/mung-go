@@ -1,5 +1,6 @@
 import React from 'react';
 import { MyPageProps } from '../types';
+import { GlobalFooter } from './ClientLayout';
 
 /**
  * 마이페이지 화면 컴포넌트
@@ -41,7 +42,8 @@ export const MyPage: React.FC<MyPageProps> = ({
       </div>
 
       {/* 마이페이지 정보 본문 */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '6px 20px 24px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '6px 20px 24px', flex: 1 }}>
         
         {/* 반려견 프로필 카드 */}
         <div style={{ background: '#FBF7EE', border: '1px solid #E6DECE', borderRadius: '20px', padding: '20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -62,7 +64,7 @@ export const MyPage: React.FC<MyPageProps> = ({
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '19px', fontWeight: 700, color: '#2E2A20' }}>{dogTitle}</div>
-            <div style={{ fontSize: '13px', color: '#948B79', marginTop: '3px' }}>{dogSize} · 멍고와 함께한 지 1일</div>
+            <div style={{ fontSize: '13px', color: '#948B79', marginTop: '3px' }}>{dogSize} · MungGo와 함께한 지 1일</div>
           </div>
         </div>
 
@@ -148,6 +150,8 @@ export const MyPage: React.FC<MyPageProps> = ({
           로그아웃
         </button>
       </div>
+      <GlobalFooter />
     </div>
+  </div>
   );
 };

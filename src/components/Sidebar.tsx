@@ -86,7 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   // 메뉴 카테고리 분리 (주요 서비스 vs 기록 및 마이페이지)
-  const mainItems = navItems.filter(item => ['홈', '반려견 동반 여행지', '산책 코스 추천'].includes(item.label));
+  const mainItems = navItems.filter(item => ['반려견 동반 여행지', '산책 코스 추천'].includes(item.label));
   const subItems = navItems.filter(item => ['반려견 일기', '마이페이지'].includes(item.label));
 
   return (
@@ -120,7 +120,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       >
         {/* 드로어 상단 헤더 */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', padding: '0 4px' }}>
-          <div>
+          <div
+            onClick={() => {
+              const homeItem = navItems.find(item => item.label === '홈');
+              if (homeItem) homeItem.go();
+              closeMenu();
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             <div
               style={{
                 fontFamily: "Pretendard, -apple-system, sans-serif",
@@ -130,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 letterSpacing: '-0.3px',
               }}
             >
-              Mung go
+              MungGo
             </div>
             <div style={{ fontSize: '13px', color: '#8C8472', marginTop: '2px', fontWeight: 500 }}>
               {menuSubtitle}

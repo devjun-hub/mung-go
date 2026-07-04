@@ -1,5 +1,6 @@
 import React from 'react';
 import { DiaryListProps } from '../types';
+import { GlobalFooter } from './ClientLayout';
 
 /**
  * 반려견 일기 목록 화면 컴포넌트
@@ -63,8 +64,9 @@ export const DiaryList: React.FC<DiaryListProps> = ({
       </div>
 
       {/* 일기 엔트리 타임라인 목록 */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px 100px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {entries.map((entry, idx) => (
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '0 20px 16px', display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
+          {entries.map((entry, idx) => (
           <div
             key={idx}
             style={{
@@ -101,6 +103,10 @@ export const DiaryList: React.FC<DiaryListProps> = ({
             </div>
           </div>
         ))}
+        </div>
+        <div style={{ paddingBottom: '90px', width: '100%' }}>
+          <GlobalFooter />
+        </div>
       </div>
 
       {/* 플로팅 일기 쓰기 버튼 */}

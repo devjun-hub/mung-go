@@ -1,33 +1,24 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  --font-black-han-sans: var(--font-pretendard);
-  --font-ibm-plex-sans-kr: var(--font-pretendard);
+  --font-gowun-dodum: "Gowun Dodum", "Noto Sans KR", sans-serif;
+  --font-black-han-sans: "Black Han Sans", sans-serif;
+  --font-ibm-plex-sans-kr: "Noto Sans KR", sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-pretendard);
-  --font-black-han: var(--font-pretendard);
+  --font-sans: var(--font-gowun-dodum);
+  --font-black-han: var(--font-black-han-sans);
 }
 
 body {
-  font-family: var(--font-pretendard);
+  font-family: var(--font-gowun-dodum);
   -webkit-font-smoothing: antialiased;
-}
-
-/* Map 'Black Han Sans' inline styles globally to Pretendard ExtraBold for clean, readable headers */
-@font-face {
-  font-family: 'Black Han Sans';
-  src: local('Pretendard-ExtraBold'), local('Pretendard ExtraBold'), local('Pretendard'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
 }
 
 /* 스크롤바 감추기 */
@@ -74,4 +65,13 @@ body {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

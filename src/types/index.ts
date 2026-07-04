@@ -35,24 +35,35 @@ export interface SidebarProps {
   closeMenu: () => void;
 }
 
+export interface WalkIndexDisplay {
+  score: number;
+  label: string;
+  grade: 'excellent' | 'good' | 'caution' | 'bad';
+  warnings: string[];
+  temperature?: number;
+  pm25?: number;
+}
+
 export interface HomeProps {
   loggedIn: boolean;
   dogName: string;
   locationText: string;
+  walkIndex: WalkIndexDisplay | null;
+  walkIndexLoading: boolean;
   goWrite: () => void;
   goMap: () => void;
-  goDetail: () => void;
+  goDetail: (contentId: string) => void;
   goTravel: () => void;
   goAccount: () => void;
   openMenu: () => void;
 }
 
 export interface TravelListProps {
-  goHome: () => void;
-  goDetail: () => void;
+  goDetail: (contentId: string) => void;
 }
 
 export interface DetailProps {
+  contentId: string;
   goTravel: () => void;
 }
 

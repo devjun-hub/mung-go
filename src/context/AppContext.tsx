@@ -5,6 +5,28 @@ import { useRouter } from 'next/navigation';
 import { DiaryEntry } from '../types';
 import { getProfile, getDiaries } from '../lib/supabase/db';
 
+export interface WalkIndexResult {
+  score: number;
+  grade: 'excellent' | 'good' | 'caution' | 'bad';
+  label: string;
+  warnings: string[];
+  asphaltTemp: number;
+  weather?: {
+    temperature: number;
+    feelsLike: number;
+    humidity: number;
+    windSpeed: number;
+    rainProb: number;
+    sky: number;
+  };
+  air?: {
+    pm10: number;
+    pm25: number;
+    khaiGrade: number;
+    stationName: string;
+  };
+}
+
 // App Context 데이터 모델 인터페이스 정의
 interface AppContextType {
   // --- 글로벌 뷰포트 상태 ---
@@ -20,6 +42,8 @@ interface AppContextType {
   setDogSize: React.Dispatch<React.SetStateAction<string>>;
   locationText: string;
   setLocationText: React.Dispatch<React.SetStateAction<string>>;
+  walkIndex: WalkIndexResult | null;
+  walkIndexLoading: boolean;
 
   // --- 일기 임시 작성 상태 ---
   draftEmoji: string;
@@ -55,6 +79,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [dogName, setDogName] = useState<string>('');
   const [dogSize, setDogSize] = useState<string>('중형');
   const [locationText, setLocationText] = useState<string>('📍 서울 · 날씨 확인 중...');
+  const [walkIndex, setWalkIndex] = useState<WalkIndexResult | null>(null);
+  const [walkIndexLoading, setWalkIndexLoading] = useState<boolean>(false);
 
   const [draftEmoji, setDraftEmoji] = useState<string>('');
   const [draftMood, setDraftMood] = useState<string>('');
@@ -65,18 +91,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     { emoji: '😌', mood: '편안', text: '한강 산책 후 곤히 잠들었어요', date: '6월 20일' },
   ]);
 
-  // --- 사용자 기기 위치 정보 탐색 및 주소 변환 API 호출 ---
+  // --- 위치 기반 날씨/주소/산책지수 로딩 ---
   useEffect(() => {
-    const fetchWeatherAndAddress = async (lat: number, lon: number, isFallback = false) => {
+    const fetchAll = async (lat: number, lon: number, isFallback = false) => {
+      // 1. 주소 + 날씨 텍스트
       try {
         const res = await fetch('/api/location', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ latitude: lat, longitude: lon }),
         });
-
         if (res.ok) {
           const data = await res.json();
           const region = isFallback ? '서울' : data.regionName;
@@ -84,26 +108,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         } else {
           setLocationText('📍 서울 · 22° 맑음 · 산책하기 딱 좋은 날씨예요');
         }
-      } catch (err) {
-        console.error('Failed to resolve reverse-geocoded region and weather in context:', err);
+      } catch {
         setLocationText('📍 서울 · 22° 맑음 · 산책하기 딱 좋은 날씨예요');
+      }
+
+      // 2. 산책지수
+      setWalkIndexLoading(true);
+      try {
+        const res = await fetch('/api/walk-index', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ latitude: lat, longitude: lon, dog: { size: dogSize as '소형' | '중형' | '대형' } }),
+        });
+        if (res.ok) {
+          const data: WalkIndexResult = await res.json();
+          setWalkIndex(data);
+        }
+      } catch (err) {
+        console.error('walk-index fetch failed:', err);
+      } finally {
+        setWalkIndexLoading(false);
       }
     };
 
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchWeatherAndAddress(latitude, longitude, false);
-        },
-        (error) => {
-          console.warn('Geolocation permission denied or error in context:', error);
-          fetchWeatherAndAddress(37.5665, 126.9780, true);
-        }
+        (pos) => fetchAll(pos.coords.latitude, pos.coords.longitude, false),
+        () => fetchAll(37.5665, 126.9780, true)
       );
     } else {
-      fetchWeatherAndAddress(37.5665, 126.9780, true);
+      fetchAll(37.5665, 126.9780, true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // --- Supabase/LocalStorage 데이터 로드 ---
@@ -152,6 +188,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setDogSize,
         locationText,
         setLocationText,
+        walkIndex,
+        walkIndexLoading,
         draftEmoji,
         setDraftEmoji,
         draftMood,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SignupWizardProps } from '../types';
+import { GlobalFooter } from './ClientLayout';
 
 /**
  * 회원가입 및 온보딩 마법사 컴포넌트
@@ -52,9 +53,10 @@ export const SignupWizard: React.FC<SignupWizardProps> = ({
 
       {/* Step 0: 계정 생성 및 로그인 단계 */}
       {signupStep === 0 && (
-        <div style={{ flex: 1, overflowY: 'auto', padding: '14px 24px 24px', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ padding: '14px 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
           <div style={{ fontFamily: "'Black Han Sans', sans-serif", fontSize: '30px', color: '#2E2A20', lineHeight: 1.1 }}>
-            멍고
+            MungGo
             <br />
             시작하기
           </div>
@@ -150,11 +152,14 @@ export const SignupWizard: React.FC<SignupWizardProps> = ({
             로그인 없이 둘러보기
           </button>
         </div>
+        <GlobalFooter />
+      </div>
       )}
 
       {/* Step 1: 반려견 프로필 정보 입력 단계 */}
       {signupStep === 1 && (
-        <div style={{ flex: 1, overflowY: 'auto', padding: '14px 24px 24px', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ padding: '14px 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
           <div style={{ fontFamily: "'Black Han Sans', sans-serif", fontSize: '27px', color: '#2E2A20', lineHeight: 1.15 }}>
             반려견을
             <br />
@@ -242,11 +247,14 @@ export const SignupWizard: React.FC<SignupWizardProps> = ({
             다음
           </button>
         </div>
+        <GlobalFooter />
+      </div>
       )}
 
       {/* Step 2: 완료 환영 페이지 */}
       {signupStep === 2 && (
-        <div style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', flex: 1 }}>
           <div
             style={{
               width: '96px',
@@ -269,7 +277,7 @@ export const SignupWizard: React.FC<SignupWizardProps> = ({
           <div style={{ fontSize: '15px', color: '#6E6553', marginTop: '10px', lineHeight: 1.6 }}>
             {welcomeLine}
             <br />
-            이제 함께 멍고를 시작해볼까요?
+            이제 함께 MungGo를 시작해볼까요?
           </div>
           
           <div style={{ flex: 1 }} />
@@ -288,9 +296,11 @@ export const SignupWizard: React.FC<SignupWizardProps> = ({
               cursor: 'pointer',
             }}
           >
-            멍고 시작하기
+            MungGo 시작하기
           </button>
         </div>
+        <GlobalFooter />
+      </div>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { DiaryWriteProps } from '../types';
+import { GlobalFooter } from './ClientLayout';
 
 /**
  * 일기 작성 화면 컴포넌트
@@ -56,8 +57,9 @@ export const DiaryWrite: React.FC<DiaryWriteProps> = ({
       </div>
 
       {/* 입력 폼 본문 영역 */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '8px 22px 24px' }}>
-        <div style={{ fontSize: '13px', color: '#948B79' }}>{todayLabel}</div>
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '8px 22px 24px', flex: 1 }}>
+          <div style={{ fontSize: '13px', color: '#948B79' }}>{todayLabel}</div>
         <div style={{ fontFamily: "'Black Han Sans', sans-serif", fontSize: '24px', color: '#2E2A20', marginTop: '4px' }}>
           오늘 기분은
           <br />
@@ -122,6 +124,8 @@ export const DiaryWrite: React.FC<DiaryWriteProps> = ({
           일기 저장하기
         </button>
       </div>
+      <GlobalFooter />
     </div>
+  </div>
   );
 };

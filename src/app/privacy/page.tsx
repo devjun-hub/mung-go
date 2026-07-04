@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { GlobalFooter } from '../../components/ClientLayout';
 
 /**
  * 개인정보처리방침 페이지 컴포넌트
@@ -34,7 +35,8 @@ export default function PrivacyPage() {
       </div>
 
       {/* 정책 서류 상세 내용 스크롤 본문 */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '20px 18px 30px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '20px 18px 30px', flex: 1 }}>
         <div style={{ color: '#8C8472', fontSize: '12px', marginBottom: '14px' }}>시행일자: 2026년 06월 25일</div>
 
         <section style={{ marginBottom: '20px' }}>
@@ -66,10 +68,8 @@ export default function PrivacyPage() {
             회원 탈퇴 처리 시 혹은 개인정보 수집 목적이 달성된 즉시 수집한 회원 정보를 영구 파기합니다.
           </p>
         </section>
-
-        <div style={{ textAlign: 'center', fontSize: '10px', color: '#A89F8C', marginTop: '28px', borderTop: '1px solid #EFE8DA', paddingTop: '16px' }}>
-          © 2026 MungGo. All rights reserved.
         </div>
+        <GlobalFooter />
       </div>
     </div>
   );

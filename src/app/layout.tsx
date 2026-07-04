@@ -3,7 +3,7 @@ import { ClientLayout } from "../components/ClientLayout";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "멍고 (MungGo) - 반려견 산책 지수 & 펫 프렌들리 동선 메이커",
+  title: "MungGo - 반려견 산책 지수 & 펫 프렌들리 동선 메이커",
   description: "반려견 성향에 맞춘 개인화 산책 지수와 펫 프렌들리 산책 동선을 확인하고, 산책 일기를 남겨보세요.",
   icons: {
     icon: "/icon.svg",

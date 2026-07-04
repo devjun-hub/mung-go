@@ -43,3 +43,9 @@ next-env.d.ts
 # local mockup templates and markdown logs
 /refs/
 *.md
+
+# local IDE and helper directories
+.idea/
+.claude/
+.bkit/
+package-lock.json

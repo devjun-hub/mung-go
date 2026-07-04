@@ -2,9 +2,38 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { AppProvider, useApp } from '../context/AppContext';
 import { Sidebar } from './Sidebar';
 import { NavItem } from '../types';
+
+export const GlobalFooter: React.FC = () => (
+  <div style={{
+    flexShrink: 0,
+    background: '#F0EBE0',
+    borderTop: '1px solid #E6DECE',
+    padding: '20px 16px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    width: '100%',
+  }}>
+    <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+      {[
+        { href: '/privacy', label: '개인정보처리방침' },
+        { href: '/terms',   label: '이용약관' },
+        { href: '/about',   label: '서비스 소개' },
+      ].map(({ href, label }) => (
+        <Link key={href} href={href} style={{ fontSize: '11px', color: '#4C6B4E', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+          {label}
+        </Link>
+      ))}
+    </div>
+    <span style={{ fontSize: '11px', color: '#8A8273', flexShrink: 0 }}>© 2026 MungGo. All rights reserved.</span>
+  </div>
+);
 
 /**
  * 클라이언트 상태 기반 레이아웃 컨텐츠 컴포넌트
@@ -85,7 +114,9 @@ const ClientLayoutContent: React.FC<{ children: React.ReactNode }> = ({ children
       />
 
       {/* 내부 활성 페이지 콘텐츠 */}
-      {children}
+      <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        {children}
+      </div>
     </>
   );
 };

@@ -9,7 +9,7 @@ import { Home } from '../../components/Home';
  * 경로: /
  */
 export default function HomePage() {
-  const { loggedIn, dogName, locationText, openMenu, go } = useApp();
+  const { loggedIn, dogName, locationText, walkIndex, walkIndexLoading, openMenu, go } = useApp();
 
   const activeDogName = dogName || '우리 강아지';
 
@@ -27,14 +27,27 @@ export default function HomePage() {
     }
   };
 
+  const walkDisplay = walkIndex
+    ? {
+        score: walkIndex.score,
+        label: walkIndex.label,
+        grade: walkIndex.grade,
+        warnings: walkIndex.warnings,
+        temperature: walkIndex.weather?.temperature,
+        pm25: walkIndex.air?.pm25,
+      }
+    : null;
+
   return (
     <Home
       loggedIn={loggedIn}
       dogName={activeDogName}
       locationText={locationText}
+      walkIndex={walkDisplay}
+      walkIndexLoading={walkIndexLoading}
       goWrite={handleWriteDiaryClick}
       goMap={() => go('/map')}
-      goDetail={() => go('/travel/detail')}
+      goDetail={(id) => go(`/travel/detail?id=${id}`)}
       goTravel={() => go('/travel')}
       goAccount={handleAccountAction}
       openMenu={openMenu}
